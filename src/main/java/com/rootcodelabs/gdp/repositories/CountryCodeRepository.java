@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author - Nipuna Kumaranathunga
+ * @description - Queries are used to minimized whole data objects loading to the memory
  */
 @Repository
 public interface CountryCodeRepository extends JpaRepository<CountryCode, Integer> {

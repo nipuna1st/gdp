@@ -1,4 +1,4 @@
-package com.rootcodelabs.gdp;
+package com.rootcodelabs.gdp.exceptions;
 
 /**
  * @author - Nipuna Kumaranathunga

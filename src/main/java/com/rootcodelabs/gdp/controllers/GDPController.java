@@ -1,6 +1,7 @@
 package com.rootcodelabs.gdp.controllers;
 
-import com.rootcodelabs.gdp.NotFoundException;
+import com.rootcodelabs.gdp.exceptions.NotFoundException;
+import com.rootcodelabs.gdp.responses.ApiResponse;
 import com.rootcodelabs.gdp.services.GDPService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/gdp")
 public class GDPController {
-
     private GDPService gdpService;
 
     @Autowired
@@ -23,11 +23,11 @@ public class GDPController {
     }
 
     @GetMapping("/{country_code}/{year}")
-    public String getGDPGrowthRate(@PathVariable("country_code") String countryCode, @PathVariable("year") Integer year){
+    public ApiResponse getGDPGrowthRate(@PathVariable("country_code") String countryCode, @PathVariable("year") Integer year){
         try {
-            return gdpService.getGDPGrowthRate(countryCode.toLowerCase(),year);
-        } catch (NotFoundException e) {
-            return e.getMessage();
+            return new ApiResponse("SUCCESS",gdpService.getGDPGrowthRate(countryCode,year));
+        } catch (Exception e){
+            return new ApiResponse("FAILED",e.getMessage());
         }
     }
 }
